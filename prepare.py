@@ -57,3 +57,16 @@ def prep_germany(df):
     df.fillna(value=values, inplace=True)
     
     return df
+
+def split_time_series(df):
+    '''
+    This function takes in a dataframe and (based off time series) and returns a train and test df
+    '''
+    train_size = .70
+    n = df.shape[0]
+    test_start_index = round(train_size * n)
+
+    train = df[:test_start_index] # everything up (not including) to the test_start_index
+    test = df[test_start_index:] # everything from the test_start_index to the end
+
+    return train, test
